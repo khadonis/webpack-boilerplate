@@ -1,8 +1,8 @@
 const path = require('path'),
-      webpack = require('webpack'),
-      CleanWebpackPlugin = require('clean-webpack-plugin'),
-      HtmlWebpackPlugin = require('html-webpack-plugin'),
-      ExtractTextPlugin = require('extract-text-webpack-plugin');
+  webpack = require('webpack'),
+  CleanWebpackPlugin = require('clean-webpack-plugin'),
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractPlugin = new ExtractTextPlugin({ filename: './assets/css/app.css' });
 
@@ -52,7 +52,7 @@ const config = {
         })
       },
       // file-loader(for images)
-      { test: /\.(jpg|png|gif|svg)$/, use: [ { loader: 'file-loader', options: { name: '[name].[ext]', outputPath: './assets/media/' } } ] },
+      { test: /\.(jpg|png|gif|svg)$/, use: [{ loader: 'file-loader', options: { name: '[name].[ext]', outputPath: './assets/media/' } }] },
       // file-loader(for fonts)
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: ['file-loader'] }
 
@@ -63,7 +63,16 @@ const config = {
     // cleaning up only 'dist' folder
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      title: 'Custom template',
+      template: 'index.ejs',
+      filename:"index.html",
+      hash:true
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Admin',
+      template: 'admin.ejs',
+      filename: "admin.html",
+      hash:true
     }),
     // extract-text-webpack-plugin instance
     extractPlugin
